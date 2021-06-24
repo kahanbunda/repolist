@@ -1,7 +1,11 @@
 <template>
   <div>
     <h1>Repositories</h1>
-    <RepoCard v-for="repo in repositories" :key="repo.name" repository="repo" />
+    <RepoCard
+      v-for="repo in repositories"
+      :key="repo.name"
+      v-bind:repository="repo"
+    />
   </div>
 </template>
 
