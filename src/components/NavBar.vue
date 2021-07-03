@@ -1,6 +1,8 @@
 <template>
   <div id="nav" class="nav">
-    <router-link to="/" class="brand">Inza Github Repos</router-link>
+    <router-link :to="{ name: 'repo-list' }" class="brand"
+      >Inza Github Repos</router-link
+    >
     <nav>
       <router-link :to="{ name: 'repo-list' }">List</router-link> |
       <router-link :to="{ name: 'about' }">About</router-link>

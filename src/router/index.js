@@ -13,7 +13,7 @@ const routes = [
     component: RepoList,
   },
   {
-    path: "/repo/:repo",
+    path: "/repository/:repo",
     name: "repo-show",
     component: RepoShow,
     props: true,

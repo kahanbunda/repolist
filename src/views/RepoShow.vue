@@ -2,14 +2,14 @@
   <div>
     <h2>Branches:</h2>
     <ul class="list-group">
-      <li v-for="branchName in branch" :key="branchName.name" class="list-item">
+      <li v-for="branchName in allBranches" :key="branchName" class="list-item">
         <b>{{ branchName }}</b>
       </li>
     </ul>
 
     <h2>Commits:</h2>
     <ul class="list-group">
-      <li v-for="(commit, index) in commits" :key="index" class="list-item">
+      <li v-for="commit in allCommits" :key="commit.id" class="list-item">
         <b>{{ commit.author.name }}:</b>
         <p>{{ commit.message }}</p>
         <time>Date: {{ commit.author.date | formatDate }} </time>
@@ -18,27 +18,15 @@
   </div>
 </template>
 <script>
-import RepoService from "@/services/RepoService.js";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   props: ["repo"],
-  data() {
-    return {
-      branch: {},
-      commits: {},
-    };
-  },
-  created() {
-    RepoService.getBranches(this.repo).then((response) => {
-      this.branch = response.data.map(({ name }) => name);
-    });
-    RepoService.getCommits(this.repo)
-      .then((response) => {
-        this.commits = response.data.slice(0, 10).map(({ commit }) => commit);
-      })
-      .catch((error) => {
-        console.log("There was an error:", error.response);
-      });
+  computed: mapGetters(["allBranches", "allCommits"]),
+  methods: mapActions(["fetchBranches", "fetchCommits"]),
+  async mounted() {
+    await this.fetchBranches(this.repo);
+    await this.fetchCommits(this.repo);
   },
 };
 </script>

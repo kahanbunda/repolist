@@ -1,35 +1,22 @@
 <template>
   <div>
     <h1>Repositories</h1>
-    <RepoCard
-      v-for="repo in repositories"
-      :key="repo.name"
-      v-bind:repository="repo"
-    />
+    <RepoCard v-for="repo in allRepos" :key="repo.name" :repository="repo" />
   </div>
 </template>
 
 <script>
-import RepoCard from "@/components/RepoCard.vue";
-import RepoService from "@/services/RepoService.js";
+import RepoCard from "@/components/RepoCard";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     RepoCard,
   },
-  data() {
-    return {
-      repositories: [],
-    };
-  },
-  created() {
-    RepoService.getRepos()
-      .then((response) => {
-        this.repositories = response.data;
-      })
-      .catch((error) => {
-        console.log("There was an error:", error.response);
-      });
+  computed: mapGetters(["allRepos"]),
+  methods: mapActions(["fetchRepos"]),
+  async mounted() {
+    await this.fetchRepos();
   },
 };
 </script>
