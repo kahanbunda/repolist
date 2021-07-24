@@ -13,7 +13,7 @@ API: https://docs.github.com/en/rest
 3. Get List commits for each repository max 10 - done
 4. Use Vue Router - done
 5. Use Axios - done
-6. Use Vuex - in processing
+6. Use Vuex - done
 7. Use Bootstrap SCSS version (https://getbootstrap.com/docs/4.5/getting-started/theming/#sass) - in processing
 8. Use Bootstrap Custom Color Pallete (https://getbootstrap.com/docs/4.5/getting-started/theming/#theme-colors) - in processing
 
